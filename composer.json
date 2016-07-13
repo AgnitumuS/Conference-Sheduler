@@ -11,7 +11,8 @@
         "doctrine/dbal": "v2.5.4",
         "adldap2/adldap2-laravel": "2.0.*",
         "laravelcollective/html": "5.2.*",
-        "barryvdh/laravel-debugbar": "^2.2"
+        "barryvdh/laravel-debugbar": "^2.2",
+        "unisharp/laravel-ckeditor": "^4.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
