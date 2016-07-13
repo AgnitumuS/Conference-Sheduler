@@ -10,23 +10,24 @@
                     <div class="row">
                         <div class="col-md-8"><h5>{{$event->title}}</h5></div>
                         <div class="col-md-4">
-			    @if (isset($user) && $user->id === $event->user->id)
-			    {!! Form::open(array('url' => 'event/'.$event->id, 'method' => 'DELETE')) !!}
-                            <div class="btn-group pull-right" role="group" aria-label="...">
+                            {!! Form::open(array('url' => 'event/'.$event->id, 'method' => 'DELETE')) !!}
+
+                            <div class="btn-group pull-right" role="group" aria-label="..."> 
+                                 @if (isset($user) && $user->id === $event->user->id)
                                 {{ Form::submit('Удалить', array('class' => 'btn btn-default')) }}
                                 <a href="{{ url('/event/'.$event->id.'/edit')}}" class="btn btn-default">Редактировать</a>
-                                {!! Form::close() !!}
-				@endif
+                                @endif
                                 <a href="{{ url('/')}}" class="btn btn-default">Назад</a>
                             </div>
-
+                            
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>
 
                 <div class="panel-body">
-                    <div class="col-lg-8 lead">
-                        <p>{{$event->description or 'Описание отсутствует'}}</p>
+                    <div class="col-lg-8">
+                        <p>{!!$event->description or 'Описание отсутствует'!!}</p>
                     </div>
                     <div class="col-lg-4">
                         <ul class="list-group text-muted">

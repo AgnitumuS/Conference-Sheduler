@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Auth;
+use Carbon\Carbon;
+use DateTime;
 use Calendar;
 use App\Event;
-use DateTime;
-use Auth;
 use App\Room;
-use Carbon\Carbon;
+
 
 class EventController extends Controller {
 
