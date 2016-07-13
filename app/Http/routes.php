@@ -16,11 +16,12 @@ Route::get('/', 'EventController@index');
 
 Route::auth();
 Route::resource('event', 'EventController');
+Route::resource('room', 'RoomController');
 /*
 Route::get('/home', 'HomeController@index');
 Route::get('/event/{$id}', 'HomeController@view');
 */
 Route::get('/ldap', function(){
-  $events = Adldap::getDefaultProvider()->search()->users()->find('Вершков');;
-  dd($events);
+  //$events = Adldap::getDefaultProvider()->search()->users()->find('Вершков');;
+  //dd($events);
 });
