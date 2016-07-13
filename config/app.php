@@ -162,6 +162,8 @@ return [
         Adldap\Laravel\AdldapServiceProvider::class,
         //html & Form
         Collective\Html\HtmlServiceProvider::class,
+        //CkEditor
+        Unisharp\Ckeditor\ServiceProvider::class,
         
         /*
          * Dev

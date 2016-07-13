@@ -51,9 +51,9 @@
                     </button>
 
                     <!-- Branding Image -->
-		    <img src="{{ url('/img/logo.png') }}" height="47" class="pull-left" hspace="10">
+                    <img src="{{ url('/img/logo.png') }}" height="47" class="pull-left" hspace="10">
                     <a class="navbar-brand" href="{{ url('/') }}">
-			 Conference Scheduler
+                        Conference Scheduler
                     </a>
                 </div>
 
@@ -93,7 +93,12 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-       
+        <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+        <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
+        <script>
+            $('textarea').ckeditor();
+            // $('.textarea').ckeditor(); // if class is prefered.
+        </script>
 
 </body>
 </html>
