@@ -30,19 +30,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ Form::label('start','Дата/время начала') }}
-                                {{ Form::datetime('start', null, array('class' => 'form-control', 'required', 'id'=>'start_datetimepicker')) }}
+                                {{ Form::datetime('start', null, array('class' => 'form-control', 'required', 'id'=>'start_datetimepicker', 'autocomplete'=>'off')) }}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ Form::label('stop','Дата/время окончания') }}
-                                {{ Form::datetime('stop', null, array('class' => 'form-control', 'required', 'id'=>'stop_datetimepicker')) }}
+                                {{ Form::datetime('stop', null, array('class' => 'form-control', 'required', 'id'=>'stop_datetimepicker', 'autocomplete'=>'off')) }}
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         {{ Form::label('description','Описание') }}
-                        {{ Form::textarea('description', null, array('class' => 'form-control', 'placeholder'=>'Описание конференции')) }}
+                        {{ Form::textarea('description', null, array('id'=>'ckeditor','class' => 'form-control', 'placeholder'=>'Описание конференции')) }}
                     </div>
 
 
@@ -54,43 +54,30 @@
     </div>
 </div>
 
-
-<script type="text/javascript">
+<script>
     $(function () {
-        $.datetimepicker.setLocale('ru');
-
-
         $('#start_datetimepicker').datetimepicker({
-            format: 'd.m.Y H:i',
-            //yearStart: 2016,
-            dayOfWeekStart: 1,
-            disabledWeekDays: [0, 6],
-            //allowTimes: ['08:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00'],
-            //minDate: new Date(),
-            //minTime: new Date(),
-            step: 30,
-            onShow: function (ct) {
-                this.setOptions({
-                    maxDate: $('#stop_datetimepicker').val() ? $('#stop_datetimepicker').val() : false
-                })
-            },
+             locale: 'ru',
+             sideBySide: true,
+             daysOfWeekDisabled: [0, 6],
+             enabledHours: [8, 9, 10, 11, 13, 14, 15, 16, 17, 18],
+             useCurrent: true,
         });
-
-        $('#stop_datetimepicker').datetimepicker({
-            format: 'd.m.Y H:i',
-            //yearStart: 2016,
-            dayOfWeekStart: 1,
-            disabledWeekDays: [0, 6],
-            //allowTimes: ['08:00','8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00'],
-            //minDate: new Date(),
-            //minTime: new Date(),
-            step: 30,
-            onShow: function (ct) {
-                this.setOptions({
-                    minDate: ($('#start_datetimepicker').val()) ? $('#start_datetimepicker').val() : false
-                })
-            },
+         $('#stop_datetimepicker').datetimepicker({
+            locale: 'ru',
+            sideBySide: true,
+            daysOfWeekDisabled: [0, 6],
+            enabledHours: [8, 9, 10, 11, 13, 14, 15, 16, 17, 18],
+            useCurrent: false //Important! See issue #1075
+        });
+        
+        $("#start_datetimepicker").on("dp.change", function (e) {
+            $('#stop_datetimepicker').data("DateTimePicker").minDate(e.date);
+        });
+        $("#stop_datetimepicker").on("dp.change", function (e) {
+            $('#start_datetimepicker').data("DateTimePicker").maxDate(e.date);
         });
     });
 </script>
+
 @endsection

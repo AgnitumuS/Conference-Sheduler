@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('description','Описание') }}
-                        {{ Form::textarea('description', $event->description, array('class' => 'form-control', 'placeholder'=>'Описание конференции')) }}
+                        {{ Form::textarea('description', $event->description, array('id'=>'ckeditor','class' => 'form-control', 'placeholder'=>'Описание конференции')) }}
                     </div>
 
 

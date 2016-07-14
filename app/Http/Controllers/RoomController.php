@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Mail;
 
 class RoomController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +16,21 @@ class RoomController extends Controller
      */
     public function index()
     {
+        /*
+        Mail::raw('Текст письма', function($message) {
+            $message->from('askue@voel.ru', 'Laravel');
+
+            $message->to('e.vershkov@voel.ru');
+        });
+         * 
+         */
+        
+          $data = array('test' => '<h1>Test message</h1>');
+          Mail::queue('emails.welcome', $data, function($message) {
+          $message->from('noreply@voel.ru', 'Conference Scheduler');
+          $message->to('e.vershkov@voel.ru','')->subject('Новая конференция');
+          });
+       
         return ('<h1>Room Controller</h1>');
     }
 
@@ -83,4 +99,5 @@ class RoomController extends Controller
     {
         //
     }
+
 }

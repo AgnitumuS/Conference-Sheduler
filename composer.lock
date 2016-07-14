@@ -61,16 +61,16 @@
         },
         {
             "name": "adldap2/adldap2-laravel",
-            "version": "v2.0.14",
+            "version": "v2.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Adldap2/Adldap2-Laravel.git",
-                "reference": "97a4027eaec9191fa6813a783b137b9b8f7a3b3e"
+                "reference": "c2e7690a5cf218c029755a200fd7c3c1df4165d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Adldap2/Adldap2-Laravel/zipball/97a4027eaec9191fa6813a783b137b9b8f7a3b3e",
-                "reference": "97a4027eaec9191fa6813a783b137b9b8f7a3b3e",
+                "url": "https://api.github.com/repos/Adldap2/Adldap2-Laravel/zipball/c2e7690a5cf218c029755a200fd7c3c1df4165d4",
+                "reference": "c2e7690a5cf218c029755a200fd7c3c1df4165d4",
                 "shasum": ""
             },
             "require": {
@@ -97,7 +97,7 @@
                 "laravel",
                 "ldap"
             ],
-            "time": "2016-07-06 12:40:13"
+            "time": "2016-07-11 14:38:58"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1598,23 +1598,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
@@ -1647,7 +1647,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:45:47"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "symfony/console",

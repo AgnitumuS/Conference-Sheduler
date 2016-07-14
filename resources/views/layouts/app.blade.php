@@ -14,28 +14,21 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-        <link rel="stylesheet" href="{{ url('/lib/bootstrap-datetimepicker/jquery.datetimepicker.min.css')}}">
-
-
+        <!--<link rel="stylesheet" href="{{ url('/lib/bootstrap-datetimepicker/jquery.datetimepicker.min.css')}}">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.css"/>
+        <link rel="stylesheet" href="{{ url('/lib/datetimepicker/css/bootstrap-datetimepicker.min.css')}}">
+        
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/lang-all.js"></script>
+        <!--
         <script src="{{ url('/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
         <script src="{{ url('/lib/bootstrap-datetimepicker/jquery.datetimepicker.full.min.js')}}" charset="UTF-8"></script>
+        -->
+        
 
-        <style>
-            body {
-                font-family: 'Helvetica';
-            }
-
-            .fa-btn {
-                margin-right: 6px;
-            }
-        </style>
     </head>
     <body id="app-layout">
         <nav class="navbar navbar-default navbar-static-top">
@@ -62,6 +55,7 @@
                     <ul class="nav navbar-nav">
                         @if (Auth::user())
                         <li><a href="{{ url('/ldap') }}">ldap</a></li>
+                        <li><a href="{{ url('/room') }}">room</a></li>
                         @endif
                     </ul>
 
@@ -90,15 +84,16 @@
         @yield('content')
 
         <!-- JavaScripts -->
-
+        
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+        <script src="{{ url('/lib/datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
         <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-        <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
         <script>
-            $('textarea').ckeditor();
-            // $('.textarea').ckeditor(); // if class is prefered.
+            CKEDITOR.replace('ckeditor', {
+                customConfig: '/lib/ckeditor/ckeditor_config.js'
+            });
+            CKEDITOR.dtd.$removeEmpty['span'] = false;
         </script>
-
 </body>
 </html>
