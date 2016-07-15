@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Mail;
+use App\Room;
 
 class RoomController extends Controller
 {
@@ -16,22 +16,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        /*
-        Mail::raw('Текст письма', function($message) {
-            $message->from('askue@voel.ru', 'Laravel');
-
-            $message->to('e.vershkov@voel.ru');
-        });
-         * 
-         */
-        
-          $data = array('test' => '<h1>Test message</h1>');
-          Mail::queue('emails.welcome', $data, function($message) {
-          $message->from('noreply@voel.ru', 'Conference Scheduler');
-          $message->to('e.vershkov@voel.ru','')->subject('Новая конференция');
-          });
-       
-        return ('<h1>Room Controller</h1>');
+        $rooms = Room::all();
+        return view('room.all', compact('rooms'));
     }
 
     /**
@@ -41,7 +27,7 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        return view('room.create', compact('rooms'));
     }
 
     /**
@@ -52,7 +38,8 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Room::create($request->all());
+        return redirect('/room');
     }
 
     /**
@@ -74,7 +61,8 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $room = Room::findOrFail($id);
+        return view('room.edit', compact(['room']));
     }
 
     /**
@@ -86,7 +74,9 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $room = Room::findOrFail($id);
+        $room->update($request->all());
+        return redirect('/room');
     }
 
     /**
@@ -97,7 +87,11 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if ($id)
+        {
+            Room::destroy($id);
+        }
+        return redirect('/room');
     }
 
 }

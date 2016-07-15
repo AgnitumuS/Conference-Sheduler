@@ -53,9 +53,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/') }}">Главная</a></li>
                         @if (Auth::user())
-                        <li><a href="{{ url('/ldap') }}">ldap</a></li>
-                        <li><a href="{{ url('/room') }}">room</a></li>
+                        <li><a href="{{ url('/room') }}">Места</a></li>
                         @endif
                     </ul>
 

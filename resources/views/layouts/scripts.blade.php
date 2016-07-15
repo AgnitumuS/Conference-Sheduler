@@ -13,7 +13,7 @@
             sideBySide: true,
             daysOfWeekDisabled: [0, 6],
             enabledHours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
-            useCurrent: false //Important! See issue #1075
+            useCurrent: true //Important! See issue #1075
         });
         
         $("#start_datetimepicker").on("dp.change", function (e) {
