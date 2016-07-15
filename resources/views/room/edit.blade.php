@@ -16,7 +16,7 @@
                             {{ Form::submit('Удалить', array('class' => 'btn btn-danger')) }}
 
                             {!! Form::close() !!}
-                            <a href="{{ url('/room/'.$room->id)}}" class="btn btn-default pull-right">Назад</a> 
+                            <a href="{{ url('/room')}}" class="btn btn-default pull-right">Назад</a> 
                             </div>
                         </div>
                     </div>

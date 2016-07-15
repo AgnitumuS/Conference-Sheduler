@@ -17,7 +17,7 @@
         <!--<link rel="stylesheet" href="{{ url('/lib/bootstrap-datetimepicker/jquery.datetimepicker.min.css')}}">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.css"/>
         <link rel="stylesheet" href="{{ url('/lib/datetimepicker/css/bootstrap-datetimepicker.min.css')}}">
-        
+
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
@@ -27,7 +27,7 @@
         <script src="{{ url('/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
         <script src="{{ url('/lib/bootstrap-datetimepicker/jquery.datetimepicker.full.min.js')}}" charset="UTF-8"></script>
         -->
-        
+
 
     </head>
     <body id="app-layout">
@@ -80,20 +80,28 @@
                 </div>
             </div>
         </nav>
-
+        @if (!Auth::user())
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1" >
+                    <p class="alert alert-info">Для создания мероприятия необходимо <a href="{{ url('/register') }}">зарегистрироваться</a></p>
+                </div>
+            </div>
+        </div>
+        @endif
         @yield('content')
 
         <!-- JavaScripts -->
-        
-        
+
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <script src="{{ url('/lib/datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-        <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+        <script src="{{ url('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
         <script>
             CKEDITOR.replace('ckeditor', {
                 customConfig: '/lib/ckeditor/ckeditor_config.js'
             });
             CKEDITOR.dtd.$removeEmpty['span'] = false;
         </script>
-</body>
+    </body>
 </html>
