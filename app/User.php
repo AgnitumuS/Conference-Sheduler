@@ -24,6 +24,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
+    public function scopeEmailsList()
+    {
+        foreach (User::all() as $key=>$value) {
+            $emails[] = $value->email; 
+        }
+        return $emails;
+    }
+    
     public function event()
     {
         return $this->hasMany(Event::class);

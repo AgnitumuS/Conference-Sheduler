@@ -8,7 +8,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-md-8"><h5>{{$event->title}}</h5></div>
+                        <div class="col-md-8"><h5><b>{{$event->title}}</b></h5></div>
                         <div class="col-md-4">
                             {!! Form::open(array('url' => 'event/'.$event->id, 'method' => 'DELETE')) !!}
 

@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
 use Mail;
-use Carbon\Carbon;
-use DateTime;
 use Calendar;
 use App\Event;
 use App\Room;
@@ -22,31 +20,8 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $events = [];
-        $color = '';
-        $ev = Event::all();
-        $user = Auth::user();
-
-        foreach ($ev as $key => $value)
-        {
-            //посвечиваем созданые события зеленым если они "свои" 
-            //и серым если "чужие"
-            ($user === null) ? $color = '#136D27' : ($ev[$key]->user->id === $user->id) ? $color = '#136D27' : $color = 'grey';
-
-            $events[] = Calendar::event(
-                            $ev[$key]->title, //. ' | Место проведения: ' . $ev[$key]->room->name . ' | Автор: ' . $ev[$key]->user->name, //event title
-                            false, //full day event?
-                            new DateTime($ev[$key]->start), //start time (you can also use Carbon instead of DateTime)
-                            new DateTime($ev[$key]->stop), //end time (you can also use Carbon instead of DateTime)
-                            $ev[$key]->id, //optionally, you can specify an event ID
-                            [
-                        'color' => $color,
-                        'url' => '/event/' . $ev[$key]->id,
-                            ]
-            );
-        }
-        $calendar = Calendar::addEvents($events);
+    {         
+        $calendar = Calendar::addEvents(Event::eventsForFullcalendar());
 
         return view('event.all', compact('calendar'));
     }
@@ -58,12 +33,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        $rooms = [];
 
-        foreach (Room::all() as $key => $value)
-        {
-            $rooms[$value->id] = $value->name;
-        }
+        $rooms = Room::roomsForSelect();
+
         return view('event.create', compact('rooms'));
     }
 
@@ -73,36 +45,29 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\CreateEventRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required|max:255|min:3',
-        ]);
-
-        foreach (User::all() as $key=>$value) {
-            $emails[] = $value->email; 
-        }
-        //$emails = array('e.vershkov@voel.ru', 'evn88@ya.ru');
-        //dd($emails);
         $event = new Event;
         $event->title = $request->title;
-        $event->start = Carbon::parse($request->start);
-        $event->stop = Carbon::parse($request->stop);
+        $event->start = $request->start;
+        $event->stop = $request->stop;
         $event->description = $request->description;
         $event->user_id = $request->user()->id;
-        $event->room_id = $request->room;
+        $event->room_id = $request->room_id;
         $event->save();
-
+        //dd($request);
+        /*
+         * Отправка почты
+         */
         $data = array(
             'name' => $request->user()->name,
-            'room' => Room::find($request->room)->name,
+            'room' => Room::find($request->room_id)->name,
             'event' => $event,
         );
-        Mail::queue('emails.newconference', $data, function($message) use ($emails) {
+        Mail::queue('emails.newconference', $data, function($message) {
             $message->from('noreply@voel.ru', 'Conference Scheduler');
-            $message->to($emails)->subject('Новая конференция');
+            $message->to(User::emailsList())->subject('Новая конференция');
         });
-
         return redirect('/');
     }
 
@@ -116,7 +81,7 @@ class EventController extends Controller
     {
         if ($id)
         {
-            $event = Event::find($id);
+            $event = Event::findOrFail($id);
             $user = Auth::user();
         }
         return view('event.show', compact(['event', 'user']));
@@ -130,13 +95,8 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        $rooms = [];
-        $event = Event::find($id);
-
-        foreach (Room::all() as $key => $value)
-        {
-            $rooms[$value->id] = $value->name;
-        }
+        $event = Event::findOrFail($id);
+        $rooms = Room::roomsForSelect();
         return view('event.edit', compact(['event', 'rooms']));
     }
 
@@ -147,16 +107,10 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\CreateEventRequest $request, $id)
     {
-        $event = Event::find($id);
-        $event->title = $request->title;
-        $event->start = Carbon::parse($request->start);
-        $event->stop = Carbon::parse($request->stop);
-        $event->description = $request->description;
-        $event->user_id = $request->user()->id;
-        $event->room_id = $request->room;
-        $event->save();
+        $event = Event::findOrFail($id);
+        $event->update($request->all());
         return redirect('/event/' . $id);
     }
 

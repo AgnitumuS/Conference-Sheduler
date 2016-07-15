@@ -15,7 +15,15 @@ class Room extends Model
         'created_at', 'updated_at',
     ];
 
-    public function event()
+    public function scopeRoomsForSelect(){
+        foreach (Room::all() as $key => $value)
+        {
+            $rooms[$value->id] = $value->name;
+        }
+        return $rooms;
+    }
+
+        public function event()
     {
         return $this->hasMany(Event::class);
     }
