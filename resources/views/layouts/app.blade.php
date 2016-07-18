@@ -72,7 +72,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Выход</a></li>
+				<li><a href="{{ url('/settings') }}"><i class="fa fa-btn fa-cog"></i> Настройки</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> Выход</a></li>
                             </ul>
                         </li>
                         @endif
