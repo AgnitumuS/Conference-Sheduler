@@ -20,7 +20,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {         
+    {
         $calendar = Calendar::addEvents(Event::eventsForFullcalendar());
 
         return view('event.all', compact('calendar'));
@@ -58,16 +58,21 @@ class EventController extends Controller
         //dd($request);
         /*
          * Отправка почты
+         * Если в настройках стоит флажок то отправить всем сообщения
          */
-        $data = array(
-            'name' => $request->user()->name,
-            'room' => Room::find($request->room_id)->name,
-            'event' => $event,
-        );
-        Mail::queue('emails.newconference', $data, function($message) {
-            $message->from('noreply@voel.ru', 'Conference Scheduler');
-            $message->to(User::emailsList())->subject('Новая конференция');
-        });
+
+        if ($request->user()->sendMessages())
+        {
+            $data = array(
+                'name' => $request->user()->name,
+                'room' => Room::find($request->room_id)->name,
+                'event' => $event,
+            );
+            Mail::queue('emails.newconference', $data, function($message) {
+                $message->from('noreply@voel.ru', 'Conference Scheduler');
+                $message->to(User::emailsList())->subject('Новая конференция');
+            });
+        }
         return redirect('/');
     }
 

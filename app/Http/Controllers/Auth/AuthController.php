@@ -67,6 +67,10 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'settings' => serialize([
+                'send_messages' => 'on',
+                'get_messages' => 'on'
+                ]),
         ]);
     }
 }
