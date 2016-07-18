@@ -18,7 +18,9 @@ Route::auth();
 Route::resource('event', 'EventController');
 Route::resource('room', 'RoomController');
 
+Route::get('settings', 'SettingsController@index');
+Route::post('settings', 'SettingsController@store');
 Route::get('/ldap', function(){
-  //$events = Adldap::getDefaultProvider()->search()->users()->find('Вершков');;
-  //dd($events);
+  $a = Adldap::getDefaultProvider()->search()->users()->find('Вершков');
+  dd($a);
 });
