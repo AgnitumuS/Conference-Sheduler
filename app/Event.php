@@ -61,10 +61,7 @@ class Event extends Model
                             new DateTime($ev[$key]->start), //start time (you can also use Carbon instead of DateTime)
                             new DateTime($ev[$key]->stop), //end time (you can also use Carbon instead of DateTime)
                             $ev[$key]->id, //optionally, you can specify an event ID
-                            [
-                        'color' => $color,
-                        'url' => '/event/' . $ev[$key]->id,
-                            ]
+                            ['color' => $color, 'url' => '/event/' . $ev[$key]->id,]
             );
         }
         return $events;
