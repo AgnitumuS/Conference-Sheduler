@@ -55,6 +55,7 @@ class EventController extends Controller
         $event->user_id = $request->user()->id;
         $event->room_id = $request->room_id;
         $event->save();
+        
         //dd($request);
         /*
          * Отправка почты
@@ -82,13 +83,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        if ($id)
-        {
-            $event = Event::findOrFail($id);
-            $user = Auth::user();
-        }
+        $user = Auth::user();
         return view('event.show', compact(['event', 'user']));
     }
 
@@ -98,9 +95,8 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        $event = Event::findOrFail($id);
         $rooms = Room::lists('name');
         return view('event.edit', compact(['event', 'rooms']));
     }
@@ -112,11 +108,10 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\CreateEventRequest $request, $id)
+    public function update(Requests\CreateEventRequest $request, Event $event)
     {
-        $event = Event::findOrFail($id);
         $event->update($request->all());
-        return redirect('/event/' . $id);
+        return redirect('/event/');
     }
 
     /**
@@ -125,12 +120,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Event $event)
     {
-        if ($id)
-        {
-            Event::destroy($id);
-        }
+        $event->delete();
         return redirect('/');
     }
 
