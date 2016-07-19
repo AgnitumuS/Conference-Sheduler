@@ -18,10 +18,15 @@
                 
                 <div class="panel-body">
                     {!! $calendar->calendar() !!}
-                    {!! $calendar->script() !!}
+                    
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+{!! @$calendar->script() !!}
 @endsection

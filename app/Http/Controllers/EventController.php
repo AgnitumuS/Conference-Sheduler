@@ -33,9 +33,8 @@ class EventController extends Controller
      */
     public function create()
     {
-
-        $rooms = Room::lists('name');
-
+        $rooms = Room::lists('name','id');
+      
         return view('event.create', compact('rooms'));
     }
 
@@ -56,7 +55,6 @@ class EventController extends Controller
         $event->room_id = $request->room_id;
         $event->save();
         
-        //dd($request);
         /*
          * Отправка почты
          * Если в настройках стоит флажок то отправить всем сообщения
@@ -97,7 +95,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        $rooms = Room::lists('name');
+        $rooms = Room::lists('name','id');
         return view('event.edit', compact(['event', 'rooms']));
     }
 

@@ -8,25 +8,7 @@
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <title>Conference Scheduler</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
-
-        <!-- Styles -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <!--<link rel="stylesheet" href="{{ url('/lib/bootstrap-datetimepicker/jquery.datetimepicker.min.css')}}">-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.css"/>
-        <link rel="stylesheet" href="{{ url('/lib/datetimepicker/css/bootstrap-datetimepicker.min.css')}}">
-
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/fullcalendar.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.8.0/lang-all.js"></script>
-        <!--
-        <script src="{{ url('/lib/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
-        <script src="{{ url('/lib/bootstrap-datetimepicker/jquery.datetimepicker.full.min.js')}}" charset="UTF-8"></script>
-        -->
+        <link rel="stylesheet" href="{{ url('/css/all.css')}}">
 
 
     </head>
@@ -72,7 +54,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-				<li><a href="{{ url('/settings') }}"><i class="fa fa-btn fa-cog"></i> Настройки</a></li>
+                                <li><a href="{{ url('/settings') }}"><i class="fa fa-btn fa-cog"></i> Настройки</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> Выход</a></li>
                             </ul>
                         </li>
@@ -91,18 +73,10 @@
         </div>
         @endif
         @yield('content')
-
-        <!-- JavaScripts -->
-
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-        <script src="{{ url('/lib/datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+        
+        <script src="{{ url('/js/all.js')}}"></script>
         <script src="{{ url('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
-        <script>
-            CKEDITOR.replace('ckeditor', {
-                customConfig: '/lib/ckeditor/ckeditor_config.js'
-            });
-            CKEDITOR.dtd.$removeEmpty['span'] = false;
-        </script>
+        @yield('footer')
+
     </body>
 </html>

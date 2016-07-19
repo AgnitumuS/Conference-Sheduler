@@ -25,3 +25,12 @@
     {{ Form::textarea('description', null, array('id'=>'ckeditor','class' => 'form-control', 'placeholder'=>'Описание конференции')) }}
 </div>
 {{ Form::submit('Сохранить', array('class' => 'btn btn-primary')) }}
+
+@section('footer') 
+        <script>
+CKEDITOR.replace('ckeditor', {
+    customConfig: '/lib/ckeditor/ckeditor_config.js'
+});
+CKEDITOR.dtd.$removeEmpty['span'] = false;
+        </script>
+@endsection
