@@ -34,7 +34,7 @@ class EventController extends Controller
     public function create()
     {
 
-        $rooms = Room::roomsForSelect();
+        $rooms = Room::lists('name');
 
         return view('event.create', compact('rooms'));
     }
@@ -101,7 +101,7 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
-        $rooms = Room::roomsForSelect();
+        $rooms = Room::lists('name');
         return view('event.edit', compact(['event', 'rooms']));
     }
 
