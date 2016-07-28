@@ -73,9 +73,9 @@
         </div>
         @endif
         @yield('content')
-        
-        <script src="{{ url('/js/all.js')}}"></script>
         <script src="{{ url('/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+        <script src="{{ url('/js/all.js')}}"></script>
+        
         @yield('footer')
 
     </body>
