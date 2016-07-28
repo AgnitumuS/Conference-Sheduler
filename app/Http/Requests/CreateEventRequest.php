@@ -26,6 +26,7 @@ class CreateEventRequest extends Request
     {
         return [
             'title' => 'required|max:255|min:3',
+            'room_id' => 'required',
             'start' => 'required|date',
             'stop' => 'required|date',
         ];
