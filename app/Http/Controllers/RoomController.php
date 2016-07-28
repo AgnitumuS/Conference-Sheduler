@@ -36,21 +36,10 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\CreateRoomRequest $request)
     {
         Room::create($request->all());
         return redirect('/room');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -59,9 +48,8 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Room $room)
     {
-        $room = Room::findOrFail($id);
         return view('room.edit', compact(['room']));
     }
 
@@ -72,11 +60,10 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Requests\CreateRoomRequest $request, Room $room)
     {
-        $room = Room::findOrFail($id);
         $room->update($request->all());
-        return redirect('/room');
+        return redirect('/room/');
     }
 
     /**
@@ -85,13 +72,9 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Room $room)
     {
-        if ($id)
-        {
-            Room::destroy($id);
-        }
-        return redirect('/room');
+       $room->delete();
+        return redirect('/room/');
     }
-
 }
