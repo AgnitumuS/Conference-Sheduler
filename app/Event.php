@@ -48,7 +48,8 @@ class Event extends Model
 
     public function scopeEventsForFullcalendar()
     {
-        $ev = Event::all();
+        $ev = Event::with('user')->get();
+        
         foreach ($ev as $key => $value)
         {
             //посвечиваем созданые события зеленым если они "свои" 

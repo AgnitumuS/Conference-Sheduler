@@ -21,6 +21,7 @@ class EventController extends Controller
      */
     public function index()
     {
+       
         $calendar = Calendar::addEvents(Event::eventsForFullcalendar());
 
         return view('event.all', compact('calendar'));
@@ -81,8 +82,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show($id)
     {
+        $event = Event::FindOrFail($id);
         $user = Auth::user();
         return view('event.show', compact(['event', 'user']));
     }

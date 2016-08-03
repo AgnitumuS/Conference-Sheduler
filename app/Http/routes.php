@@ -15,12 +15,14 @@ use App\Event;
 
 Route::auth();
 Route::get('/', 'EventController@index');
+
+Route::resource('event', 'EventController');
 Route::group(['middleware' => 'auth'], function() {
-    Route::resource('event', 'EventController');
     Route::resource('room', 'RoomController');
     Route::get('settings', 'SettingsController@index');
     Route::post('settings', 'SettingsController@store');
-    Route::get('/ldap', function() {
+    
+    Route::get('ldap', function() {
         $a = Adldap::getDefaultProvider()->search()->users()->find('Вершков');
         dd($a);
     });
