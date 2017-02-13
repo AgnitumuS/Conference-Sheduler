@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
-        <title>Conference Scheduler</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <link rel="stylesheet" href="{{ url('/css/all.css')}}">
 
@@ -28,7 +28,7 @@
                     <!-- Branding Image -->
                     <img src="{{ url('/img/logo.png') }}" height="47" class="pull-left" hspace="10">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        Conference Scheduler
+                        {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
 
@@ -67,7 +67,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1" >
-                    <p class="alert alert-info">Для создания мероприятия необходимо <a href="{{ url('/register') }}">зарегистрироваться</a></p>
+                    <p class="alert alert-info">Для создания мероприятия необходимо <a href="{{ url('/register') }}">зарегистрироваться</a> или <a href="{{ url('/login') }}">авторизоваться</a></p>
                 </div>
             </div>
         </div>
